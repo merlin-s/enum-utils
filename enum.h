@@ -56,7 +56,7 @@ template <class Enum> struct enum_traits {
     constexpr static std::array<EUs_str_type const, count> name##_names                                                \
         = { { EUs_foreach_lastspecial(seq, name, EUs_string_elem_c, EUs_string_elem) } };                              \
     constexpr static EUs_str_type enum_to_str(name n) { return name##_names[static_cast<std::size_t>(n)]; }            \
-    name str_to_##name(EUs_str_type const& str)                                                                        \
+    static name str_to_##name(EUs_str_type const& str)                                                                 \
     {                                                                                                                  \
         for (std::size_t i = 0; i < static_cast<std::size_t>(count); ++i) {                                            \
             if (EUs_str_cmp(str, name##_names[i]))                                                                     \

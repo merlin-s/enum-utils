@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.8)
+cmake_minimum_required(VERSION 3.1)
 project(enum-utils CXX)
 set(tgt enum-utils-test)
 add_executable(${tgt} test.cpp enum.h)

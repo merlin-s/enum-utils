@@ -2,5 +2,8 @@ cmake_minimum_required(VERSION 3.1)
 project(enum-utils CXX)
 set(tgt enum-utils-test)
 add_executable(${tgt} test.cpp enum.h)
-target_include_directories(${tgt} PUBLIC ".")
+target_include_directories(${tgt} PUBLIC
+    "."
+    "${BOOST_ROOT}"
+)
 set_property(TARGET ${tgt} PROPERTY CXX_STANDARD 11)

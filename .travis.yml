@@ -22,11 +22,15 @@ addons:
 
 before_install:
     - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
-    - mkdir ${DEPS_DIR} ; cd ${DEPS_DIR}
+    - mkdir ${DEPS_DIR} && cd ${DEPS_DIR}
     - |
       CMAKE_URL="http://www.cmake.org/files/v3.3/cmake-3.3.1-Linux-x86_64.tar.gz"
       mkdir -p cmake && travis_retry wget --quiet --no-check-certificate  -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C cmake
       export PATH=${DEPS_DIR}/cmake/bin:${PATH}
+    - |
+      BOOST_URL="http://sourceforge.net/projects/boost/files/boost/1.60.0/boost_1_60_0.tar.gz"; fi
+    - mkdir boost && travis_retry wget --quiet -O - ${BOOST_URL} | tar --strip-components=1 -xz -C boost; fi
+    - if [[ -d ${DEPS_DIR}/boost ]]; then CMAKE_OPTIONS+=" -DBOOST_ROOT=${DEPS_DIR}/boost"; fi
 install:
     - if [ "$CXX" = "g++" ]; then export CXX="g++-5" CC="gcc-5"; fi
     - if [ "$CXX" = "clang++" ]; then export CXX="clang++-3.7" CC="clang-3.7"; fi

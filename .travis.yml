@@ -38,9 +38,11 @@ install:
 before_script:
     - cd ${TRAVIS_BUILD_DIR}
     - mkdir build && cd build
-    - cmake .. -DCMAKE_CXX_COMPILER=${COMPILER} ${CMAKE_OPTIONS}
+    - cmake .. -DCMAKE_CXX_COMPILER=${COMPILER} ${CMAKE_OPTIONS} -DCMAKE_INSTALL_PREFIX install
 
 script:
     - cd ${TRAVIS_BUILD_DIR}
     - cd build
-    - make VERBOSE=1
+    - cmake --build .
+    - cmake --build . --target install
+    - bin/enum-utils.test.exe

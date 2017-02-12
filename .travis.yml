@@ -45,4 +45,4 @@ script:
     - cd build
     - cmake --build .
     - cmake --build . --target install
-    - bin/enum-utils.test
+    - install/bin/enum-utils.test

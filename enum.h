@@ -55,8 +55,8 @@ template <class Enum> struct enum_traits {
         = { { EUs_foreach_lastspecial(seq, name, EUs_scoped_elem_c, EUs_scoped_elem) } };                              \
     constexpr static std::array<EUs_str_type const, count> name##_names                                                \
         = { { EUs_foreach_lastspecial(seq, name, EUs_string_elem_c, EUs_string_elem) } };                              \
-    constexpr static EUs_str_type enum_to_str(name n) { return name##_names[static_cast<std::size_t>(n)]; }            \
-    static name str_to_##name(EUs_str_type const& str)                                                                 \
+    inline constexpr static EUs_str_type enum_to_str(name n) { return name##_names[static_cast<std::size_t>(n)]; }            \
+    inline static name str_to_##name(EUs_str_type const& str)                                                                 \
     {                                                                                                                  \
         for (std::size_t i = 0; i < static_cast<std::size_t>(count); ++i) {                                            \
             if (EUs_str_cmp(str, name##_names[i]))                                                                     \
@@ -73,10 +73,10 @@ template <class Enum> struct enum_traits {
                 template <size_t I> struct get {                                                                       \
                 };                                                                                                     \
             };                                                                                                         \
-            constexpr static decltype(scope::name##_values) const& values() { return scope::name##_values; }           \
-            constexpr static decltype(scope::name##_names) const& names() { return scope::name##_names; }              \
-            static scope::name from_string(EUs_str_type const& str) { return scope::str_to_##name(str); }              \
-            constexpr static EUs_str_type to_string(scope::name n) { return scope::enum_to_str(n); }                   \
+            inline constexpr static decltype(scope::name##_values) const& values() { return scope::name##_values; }           \
+            inline constexpr static decltype(scope::name##_names) const& names() { return scope::name##_names; }              \
+            inline static scope::name from_string(EUs_str_type const& str) { return scope::str_to_##name(str); }              \
+            inline constexpr static EUs_str_type to_string(scope::name n) { return scope::enum_to_str(n); }                   \
         };                                                                                                             \
         BOOST_PP_SEQ_FOR_EACH(EUs_traits_enumerator_get, scope::name, seq)                                             \
     }

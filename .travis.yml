@@ -38,7 +38,7 @@ install:
 before_script:
     - cd ${TRAVIS_BUILD_DIR}
     - mkdir build && cd build
-    - cmake .. -DCMAKE_CXX_COMPILER=${COMPILER} ${CMAKE_OPTIONS} -DCMAKE_INSTALL_PREFIX install
+    - cmake .. -DCMAKE_CXX_COMPILER=${COMPILER} ${CMAKE_OPTIONS} -DCMAKE_INSTALL_PREFIX=./install
 
 script:
     - cd ${TRAVIS_BUILD_DIR}
